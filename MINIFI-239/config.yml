@@ -1,0 +1,109 @@
+Flow Controller:
+  name: MINIFI-239
+  comment: ''
+Core Properties:
+  flow controller graceful shutdown period: 10 sec
+  flow service write delay interval: 500 ms
+  administrative yield duration: 30 sec
+  bored yield duration: 10 millis
+  max concurrent threads: 1
+FlowFile Repository:
+  partitions: 256
+  checkpoint interval: 2 mins
+  always sync: false
+  Swap:
+    threshold: 20000
+    in period: 5 sec
+    in threads: 1
+    out period: 5 sec
+    out threads: 4
+Content Repository:
+  content claim max appendable size: 10 MB
+  content claim max flow files: 100
+  always sync: false
+Provenance Repository:
+  provenance rollover time: 1 min
+Component Status Repository:
+  buffer size: 1440
+  snapshot frequency: 1 min
+Security Properties:
+  keystore: ''
+  keystore type: ''
+  keystore password: ''
+  key password: ''
+  truststore: ''
+  truststore type: ''
+  truststore password: ''
+  ssl protocol: ''
+  Sensitive Props:
+    key:
+    algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL
+    provider: BC
+Processors:
+- name: InvokeHTTP
+  id: a0573d0b-015b-1000-2d14-4b42cc1c0565
+  class: org.apache.nifi.processors.standard.InvokeHTTP
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 10 sec
+  penalization period: 30 sec
+  yield period: 1 sec
+  run duration nanos: 0
+  auto-terminated relationships list:
+  - Failure
+  - No Retry
+  - Original
+  - Retry
+  Properties:
+    Add Response Headers to Request: 'false'
+    Always Output Response: 'false'
+    Attributes to Send:
+    Basic Authentication Password:
+    Basic Authentication Username:
+    Connection Timeout: 5 secs
+    Content-Type: ${mime.type}
+    Digest Authentication: 'false'
+    Follow Redirects: 'True'
+    HTTP Method: GET
+    Include Date Header: 'True'
+    Max Length To Put In Attribute: '256'
+    Penalize on "No Retry": 'false'
+    Proxy Host:
+    Proxy Port:
+    Put Response Body In Attribute:
+    Read Timeout: 15 secs
+    Remote URL: http://www.cnn.com
+    SSL Context Service:
+    Trusted Hostname:
+    Use Chunked Encoding: 'false'
+    invokehttp-proxy-password:
+    invokehttp-proxy-user:
+    send-message-body: 'true'
+Connections:
+- name: InvokeHTTP/Response/a0573d0b-015b-1000-2d14-4b42cc1c0564
+  id: InvokeHTTP/Response/a0573d0b-015b-1000-2d14-4b42cc1c0564
+  source name: InvokeHTTP
+  source id: a0573d0b-015b-1000-2d14-4b42cc1c0565
+  source relationship name: Response
+  destination name: a0573d0b-015b-1000-2d14-4b42cc1c0564
+  destination id: a0573d0b-015b-1000-2d14-4b42cc1c0564
+  max work queue size: 10000
+  max work queue data size: 1 GB
+  flowfile expiration: 0 sec
+  queue prioritizer class: ''
+Remote Processing Groups:
+- name: http://localhost:8080/nifi
+  id: http://localhost:8080/nifi
+  url: http://localhost:8080/nifi
+  comment: ''
+  timeout: 30 sec
+  yield period: 10 sec
+  Input Ports:
+  - id: a0573d0b-015b-1000-2d14-4b42cc1c0564
+    name: From MiNiFi
+    comment: ''
+    max concurrent tasks: 1
+    use compression: false
+    Properties:
+      Port: 19191
+      Host Name: localhost

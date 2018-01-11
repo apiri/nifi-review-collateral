@@ -1,0 +1,116 @@
+MiNiFi Config Version: 3
+Flow Controller:
+  name: EdgeCollect
+  comment: ''
+Core Properties:
+  flow controller graceful shutdown period: 10 sec
+  flow service write delay interval: 500 ms
+  administrative yield duration: 30 sec
+  bored yield duration: 10 millis
+  max concurrent threads: 1
+  variable registry properties: ''
+FlowFile Repository:
+  partitions: 256
+  checkpoint interval: 2 mins
+  always sync: false
+  Swap:
+    threshold: 20000
+    in period: 5 sec
+    in threads: 1
+    out period: 5 sec
+    out threads: 4
+Content Repository:
+  content claim max appendable size: 10 MB
+  content claim max flow files: 100
+  always sync: false
+Provenance Repository:
+  provenance rollover time: 1 min
+Component Status Repository:
+  buffer size: 1440
+  snapshot frequency: 1 min
+Security Properties:
+  keystore: ''
+  keystore type: ''
+  keystore password: ''
+  key password: ''
+  truststore: ''
+  truststore type: ''
+  truststore password: ''
+  ssl protocol: ''
+  Sensitive Props:
+    key:
+    algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL
+    provider: BC
+Processors:
+- id: ead47c05-d7c6-307a-0000-000000000000
+  name: GetTempSensorFile
+  class: org.apache.nifi.processors.standard.GetFile
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 60 sec
+  penalization period: 30 sec
+  yield period: 1 sec
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties:
+    Batch Size: '10'
+    File Filter: '[^\.].*temper.log'
+    Ignore Hidden Files: 'true'
+    Input Directory: /data/sensor
+    Keep Source File: 'true'
+    Maximum File Age:
+    Maximum File Size:
+    Minimum File Age: 0 sec
+    Minimum File Size: 0 B
+    Path Filter:
+    Polling Interval: 0 sec
+    Recurse Subdirectories: 'true'
+- id: 91a15f44-8694-38d5-0000-000000000000
+  name: PutTCP
+  class: org.apache.nifi.processors.standard.PutTCP
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 sec
+  penalization period: 30 sec
+  yield period: 1 sec
+  run duration nanos: 0
+  auto-terminated relationships list:
+  - success
+  Properties:
+    Character Set: UTF-8
+    Connection Per FlowFile: 'false'
+    Hostname: 10.0.0.201
+    Idle Connection Expiration: 5 seconds
+    Max Size of Socket Send Buffer: 100 KB
+    Outgoing Message Delimiter: \n
+    Port: '10001'
+    SSL Context Service:
+    Timeout: 10 seconds
+Controller Services: []
+Process Groups: []
+Input Ports: []
+Output Ports: []
+Funnels: []
+Connections:
+- id: 7d6e0246-7b83-32f2-0000-000000000000
+  name: GetTempSensorFile/success/PutTCP
+  source id: ead47c05-d7c6-307a-0000-000000000000
+  source relationship names:
+  - success
+  destination id: 91a15f44-8694-38d5-0000-000000000000
+  max work queue size: 10000
+  max work queue data size: 1 GB
+  flowfile expiration: 0 sec
+  queue prioritizer class: org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer
+- id: eb06999e-33e7-3ee1-0000-000000000000
+  name: PutTCP/failure/PutTCP
+  source id: 91a15f44-8694-38d5-0000-000000000000
+  source relationship names:
+  - failure
+  destination id: 91a15f44-8694-38d5-0000-000000000000
+  max work queue size: 10000
+  max work queue data size: 1 GB
+  flowfile expiration: 0 sec
+  queue prioritizer class: org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer
+Remote Process Groups: []
+NiFi Properties Overrides: {}

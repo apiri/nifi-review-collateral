@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<flowController encoding-version="1.1">
+  <maxTimerDrivenThreadCount>1</maxTimerDrivenThreadCount>
+  <maxEventDrivenThreadCount>1</maxEventDrivenThreadCount>
+  <rootGroup>
+    <id>Root-Group</id>
+    <name>EdgeCollect</name>
+    <position x="0.0" y="0.0"/>
+    <comment/>
+    <processor>
+      <id>ead47c05-d7c6-307a-0000-000000000000</id>
+      <name>GetTempSensorFile</name>
+      <position x="0.0" y="0.0"/>
+      <styles/>
+      <comment/>
+      <class>org.apache.nifi.processors.standard.GetFile</class>
+      <bundle>
+        <group>org.apache.nifi.minifi</group>
+        <artifact>minifi-standard-nar</artifact>
+        <version>0.2.0</version>
+      </bundle>
+      <maxConcurrentTasks>1</maxConcurrentTasks>
+      <schedulingPeriod>60 sec</schedulingPeriod>
+      <penalizationPeriod>30 sec</penalizationPeriod>
+      <yieldPeriod>1 sec</yieldPeriod>
+      <bulletinLevel>WARN</bulletinLevel>
+      <lossTolerant>false</lossTolerant>
+      <scheduledState>STOPPED</scheduledState>
+      <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+      <executionNode>ALL</executionNode>
+      <runDurationNanos>0</runDurationNanos>
+      <property>
+        <name>Input Directory</name>
+        <value>/data/sensor</value>
+      </property>
+      <property>
+        <name>File Filter</name>
+        <value>[^\.].*temper.log</value>
+      </property>
+      <property>
+        <name>Path Filter</name>
+      </property>
+      <property>
+        <name>Batch Size</name>
+        <value>10</value>
+      </property>
+      <property>
+        <name>Keep Source File</name>
+        <value>true</value>
+      </property>
+      <property>
+        <name>Recurse Subdirectories</name>
+        <value>true</value>
+      </property>
+      <property>
+        <name>Polling Interval</name>
+        <value>0 sec</value>
+      </property>
+      <property>
+        <name>Ignore Hidden Files</name>
+        <value>true</value>
+      </property>
+      <property>
+        <name>Minimum File Age</name>
+        <value>0 sec</value>
+      </property>
+      <property>
+        <name>Maximum File Age</name>
+      </property>
+      <property>
+        <name>Minimum File Size</name>
+        <value>0 B</value>
+      </property>
+      <property>
+        <name>Maximum File Size</name>
+      </property>
+    </processor>
+    <processor>
+      <id>91a15f44-8694-38d5-0000-000000000000</id>
+      <name>PutTCP</name>
+      <position x="0.0" y="0.0"/>
+      <styles/>
+      <comment/>
+      <class>org.apache.nifi.processors.standard.PutTCP</class>
+      <bundle>
+        <group>org.apache.nifi.minifi</group>
+        <artifact>minifi-standard-nar</artifact>
+        <version>0.2.0</version>
+      </bundle>
+      <maxConcurrentTasks>1</maxConcurrentTasks>
+      <schedulingPeriod>0 sec</schedulingPeriod>
+      <penalizationPeriod>30 sec</penalizationPeriod>
+      <yieldPeriod>1 sec</yieldPeriod>
+      <bulletinLevel>WARN</bulletinLevel>
+      <lossTolerant>false</lossTolerant>
+      <scheduledState>STOPPED</scheduledState>
+      <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+      <executionNode>ALL</executionNode>
+      <runDurationNanos>0</runDurationNanos>
+      <property>
+        <name>Hostname</name>
+        <value>10.0.0.201</value>
+      </property>
+      <property>
+        <name>Port</name>
+        <value>10001</value>
+      </property>
+      <property>
+        <name>Max Size of Socket Send Buffer</name>
+        <value>100 KB</value>
+      </property>
+      <property>
+        <name>Idle Connection Expiration</name>
+        <value>5 seconds</value>
+      </property>
+      <property>
+        <name>Connection Per FlowFile</name>
+        <value>false</value>
+      </property>
+      <property>
+        <name>Outgoing Message Delimiter</name>
+        <value>\n</value>
+      </property>
+      <property>
+        <name>Timeout</name>
+        <value>10 seconds</value>
+      </property>
+      <property>
+        <name>SSL Context Service</name>
+      </property>
+      <property>
+        <name>Character Set</name>
+        <value>UTF-8</value>
+      </property>
+      <autoTerminatedRelationship>success</autoTerminatedRelationship>
+    </processor>
+    <connection>
+      <id>eb06999e-33e7-3ee1-0000-000000000000</id>
+      <name>PutTCP/failure/PutTCP</name>
+      <bendPoints/>
+      <labelIndex>1</labelIndex>
+      <zIndex>0</zIndex>
+      <sourceId>91a15f44-8694-38d5-0000-000000000000</sourceId>
+      <sourceGroupId>Root-Group</sourceGroupId>
+      <sourceType>PROCESSOR</sourceType>
+      <destinationId>91a15f44-8694-38d5-0000-000000000000</destinationId>
+      <destinationGroupId>Root-Group</destinationGroupId>
+      <destinationType>PROCESSOR</destinationType>
+      <relationship>failure</relationship>
+      <maxWorkQueueSize>10000</maxWorkQueueSize>
+      <maxWorkQueueDataSize>1 GB</maxWorkQueueDataSize>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <queuePrioritizerClass>org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer</queuePrioritizerClass>
+    </connection>
+    <connection>
+      <id>7d6e0246-7b83-32f2-0000-000000000000</id>
+      <name>GetTempSensorFile/success/PutTCP</name>
+      <bendPoints/>
+      <labelIndex>1</labelIndex>
+      <zIndex>0</zIndex>
+      <sourceId>ead47c05-d7c6-307a-0000-000000000000</sourceId>
+      <sourceGroupId>Root-Group</sourceGroupId>
+      <sourceType>PROCESSOR</sourceType>
+      <destinationId>91a15f44-8694-38d5-0000-000000000000</destinationId>
+      <destinationGroupId>Root-Group</destinationGroupId>
+      <destinationType>PROCESSOR</destinationType>
+      <relationship>success</relationship>
+      <maxWorkQueueSize>10000</maxWorkQueueSize>
+      <maxWorkQueueDataSize>1 GB</maxWorkQueueDataSize>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <queuePrioritizerClass>org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer</queuePrioritizerClass>
+    </connection>
+  </rootGroup>
+  <controllerServices/>
+  <reportingTasks/>
+</flowController>

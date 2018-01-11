@@ -1,0 +1,344 @@
+<?xml version="1.0" ?>
+<template encoding-version="1.1">
+  <description></description>
+  <groupId>1a834d98-015d-1000-2149-54dae3b36a5c</groupId>
+  <name>EdgeCollect</name>
+  <snippet>
+    <connections>
+      <id>eb06999e-33e7-3ee1-0000-000000000000</id>
+      <parentGroupId>cb500027-21c2-38bc-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+      <bends>
+        <x>1134.0</x>
+        <y>29.0</y>
+      </bends>
+      <bends>
+        <x>1139.0</x>
+        <y>80.0</y>
+      </bends>
+      <destination>
+        <groupId>cb500027-21c2-38bc-0000-000000000000</groupId>
+        <id>91a15f44-8694-38d5-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <prioritizers>org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer</prioritizers>
+      <selectedRelationships>failure</selectedRelationships>
+      <source>
+        <groupId>cb500027-21c2-38bc-0000-000000000000</groupId>
+        <id>91a15f44-8694-38d5-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <connections>
+      <id>7d6e0246-7b83-32f2-0000-000000000000</id>
+      <parentGroupId>cb500027-21c2-38bc-0000-000000000000</parentGroupId>
+      <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+      <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+      <destination>
+        <groupId>cb500027-21c2-38bc-0000-000000000000</groupId>
+        <id>91a15f44-8694-38d5-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </destination>
+      <flowFileExpiration>0 sec</flowFileExpiration>
+      <labelIndex>1</labelIndex>
+      <name></name>
+      <prioritizers>org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer</prioritizers>
+      <selectedRelationships>success</selectedRelationships>
+      <source>
+        <groupId>cb500027-21c2-38bc-0000-000000000000</groupId>
+        <id>ead47c05-d7c6-307a-0000-000000000000</id>
+        <type>PROCESSOR</type>
+      </source>
+      <zIndex>0</zIndex>
+    </connections>
+    <processors>
+      <id>91a15f44-8694-38d5-0000-000000000000</id>
+      <parentGroupId>cb500027-21c2-38bc-0000-000000000000</parentGroupId>
+      <position>
+        <x>638.0000000000001</x>
+        <y>0.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.3.0</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments></comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Hostname</key>
+            <value>
+              <name>Hostname</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Port</key>
+            <value>
+              <name>Port</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Max Size of Socket Send Buffer</key>
+            <value>
+              <name>Max Size of Socket Send Buffer</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Idle Connection Expiration</key>
+            <value>
+              <name>Idle Connection Expiration</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Connection Per FlowFile</key>
+            <value>
+              <name>Connection Per FlowFile</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Outgoing Message Delimiter</key>
+            <value>
+              <name>Outgoing Message Delimiter</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Timeout</key>
+            <value>
+              <name>Timeout</name>
+            </value>
+          </entry>
+          <entry>
+            <key>SSL Context Service</key>
+            <value>
+              <identifiesControllerService>org.apache.nifi.ssl.SSLContextService</identifiesControllerService>
+              <name>SSL Context Service</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Character Set</key>
+            <value>
+              <name>Character Set</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Hostname</key>
+            <value>10.0.0.201</value>
+          </entry>
+          <entry>
+            <key>Port</key>
+            <value>10001</value>
+          </entry>
+          <entry>
+            <key>Max Size of Socket Send Buffer</key>
+            <value>1 MB</value>
+          </entry>
+          <entry>
+            <key>Idle Connection Expiration</key>
+            <value>5 seconds</value>
+          </entry>
+          <entry>
+            <key>Connection Per FlowFile</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Outgoing Message Delimiter</key>
+            <value>\n</value>
+          </entry>
+          <entry>
+            <key>Timeout</key>
+            <value>10 seconds</value>
+          </entry>
+          <entry>
+            <key>SSL Context Service</key>
+          </entry>
+          <entry>
+            <key>Character Set</key>
+            <value>UTF-8</value>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>0 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>PutTCP</name>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>failure</name>
+      </relationships>
+      <relationships>
+        <autoTerminate>true</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.PutTCP</type>
+    </processors>
+    <processors>
+      <id>ead47c05-d7c6-307a-0000-000000000000</id>
+      <parentGroupId>cb500027-21c2-38bc-0000-000000000000</parentGroupId>
+      <position>
+        <x>0.0</x>
+        <y>0.0</y>
+      </position>
+      <bundle>
+        <artifact>nifi-standard-nar</artifact>
+        <group>org.apache.nifi</group>
+        <version>1.3.0</version>
+      </bundle>
+      <config>
+        <bulletinLevel>WARN</bulletinLevel>
+        <comments>This processor will read the usb temperature sensor files in the /data/sensor directory and send upstream for collection and further processing.</comments>
+        <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+        <descriptors>
+          <entry>
+            <key>Input Directory</key>
+            <value>
+              <name>Input Directory</name>
+            </value>
+          </entry>
+          <entry>
+            <key>File Filter</key>
+            <value>
+              <name>File Filter</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Path Filter</key>
+            <value>
+              <name>Path Filter</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Batch Size</key>
+            <value>
+              <name>Batch Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Keep Source File</key>
+            <value>
+              <name>Keep Source File</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Recurse Subdirectories</key>
+            <value>
+              <name>Recurse Subdirectories</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Polling Interval</key>
+            <value>
+              <name>Polling Interval</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Ignore Hidden Files</key>
+            <value>
+              <name>Ignore Hidden Files</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum File Age</key>
+            <value>
+              <name>Minimum File Age</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum File Age</key>
+            <value>
+              <name>Maximum File Age</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Minimum File Size</key>
+            <value>
+              <name>Minimum File Size</name>
+            </value>
+          </entry>
+          <entry>
+            <key>Maximum File Size</key>
+            <value>
+              <name>Maximum File Size</name>
+            </value>
+          </entry>
+        </descriptors>
+        <executionNode>ALL</executionNode>
+        <lossTolerant>false</lossTolerant>
+        <penaltyDuration>30 sec</penaltyDuration>
+        <properties>
+          <entry>
+            <key>Input Directory</key>
+            <value>/data/sensor</value>
+          </entry>
+          <entry>
+            <key>File Filter</key>
+            <value>[^\.].*temper.log</value>
+          </entry>
+          <entry>
+            <key>Path Filter</key>
+          </entry>
+          <entry>
+            <key>Batch Size</key>
+            <value>10</value>
+          </entry>
+          <entry>
+            <key>Keep Source File</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Recurse Subdirectories</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Polling Interval</key>
+            <value>0 sec</value>
+          </entry>
+          <entry>
+            <key>Ignore Hidden Files</key>
+            <value>true</value>
+          </entry>
+          <entry>
+            <key>Minimum File Age</key>
+            <value>0 sec</value>
+          </entry>
+          <entry>
+            <key>Maximum File Age</key>
+          </entry>
+          <entry>
+            <key>Minimum File Size</key>
+            <value>0 B</value>
+          </entry>
+          <entry>
+            <key>Maximum File Size</key>
+          </entry>
+        </properties>
+        <runDurationMillis>0</runDurationMillis>
+        <schedulingPeriod>60 sec</schedulingPeriod>
+        <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+        <yieldDuration>1 sec</yieldDuration>
+      </config>
+      <name>GetTempSensorFile</name>
+      <relationships>
+        <autoTerminate>false</autoTerminate>
+        <name>success</name>
+      </relationships>
+      <style></style>
+      <type>org.apache.nifi.processors.standard.GetFile</type>
+    </processors>
+  </snippet>
+  <timestamp>07/09/2017 11:54:36 AEST</timestamp>
+</template>
