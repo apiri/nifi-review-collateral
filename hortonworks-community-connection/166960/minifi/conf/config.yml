@@ -1,0 +1,98 @@
+MiNiFi Config Version: 3
+Flow Controller:
+  name: MiNiFi
+  comment: ''
+Core Properties:
+  flow controller graceful shutdown period: 10 sec
+  flow service write delay interval: 500 ms
+  administrative yield duration: 30 sec
+  bored yield duration: 10 millis
+  max concurrent threads: 1
+  variable registry properties: ''
+FlowFile Repository:
+  partitions: 256
+  checkpoint interval: 2 mins
+  always sync: false
+  Swap:
+    threshold: 20000
+    in period: 5 sec
+    in threads: 1
+    out period: 5 sec
+    out threads: 4
+Content Repository:
+  content claim max appendable size: 10 MB
+  content claim max flow files: 100
+  always sync: false
+Provenance Repository:
+  provenance rollover time: 1 min
+  implementation: org.apache.nifi.provenance.MiNiFiPersistentProvenanceRepository
+Component Status Repository:
+  buffer size: 1440
+  snapshot frequency: 1 min
+Security Properties:
+  keystore: './conf/keystore.jks'
+  keystore type: 'jks'
+  keystore password: 'xxxxxx'
+  key password: 'xxxxxx'
+  truststore: './conf/truststore.jks'
+  truststore type: 'jks'
+  truststore password: 'xxxxx'
+  ssl protocol: TLS
+  Sensitive Props:
+    key:
+    algorithm: PBEWITHMD5AND256BITAES-CBC-OPENSSL
+    provider: BC
+Processors:
+- id: ab316f87-2c97-3fe4-0000-000000000000
+  name: ExecuteProcess
+  class: org.apache.nifi.processors.standard.ExecuteProcess
+  max concurrent tasks: 1
+  scheduling strategy: TIMER_DRIVEN
+  scheduling period: 0 sec
+  penalization period: 30 sec
+  yield period: 1 sec
+  run duration nanos: 0
+  auto-terminated relationships list: []
+  Properties:
+    Argument Delimiter: ' '
+    Batch Duration: 5 sec
+    Command: python
+    Command Arguments: /home/pi/Documents/sensehat.py
+    Redirect Error Stream: 'false'
+Controller Services: []
+Process Groups: []
+Input Ports: []
+Output Ports: []
+Funnels: []
+Connections:
+- id: 7aba8512-3f8c-3dd9-0000-000000000000
+  name: ExecuteProcess/success/1e4831a5-0161-1000-53c4-30f108c20272
+  source id: ab316f87-2c97-3fe4-0000-000000000000
+  source relationship names:
+  - success
+  destination id: 1e4831a5-0161-1000-53c4-30f108c20272
+  max work queue size: 10000
+  max work queue data size: 1 GB
+  flowfile expiration: 0 sec
+  queue prioritizer class: ''
+Remote Process Groups:
+- id: db36c66b-4e7b-316b-0000-000000000000
+  name: ''
+  url: https://<nifi hostname>:8011/nifi
+  comment: ''
+  timeout: 30 sec
+  yield period: 10 sec
+  transport protocol: RAW
+  proxy host: ''
+  proxy port: ''
+  proxy user: ''
+  proxy password: ''
+  local network interface: ''
+  Input Ports:
+  - id: 1e4831a5-0161-1000-53c4-30f108c20272
+    name: MiNiFi
+    comment: ''
+    max concurrent tasks: 1
+    use compression: false
+  Output Ports: []
+NiFi Properties Overrides: {}

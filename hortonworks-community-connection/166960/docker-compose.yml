@@ -1,0 +1,13 @@
+
+version: '3'
+
+services:
+  nifi-ca:
+    image:  apache/nifi-toolkit
+    hostname: nifi-ca
+    command: "tls-toolkit server -t ${tls_token} -D CN=nifi-ca,OU=Docker NiFi"
+
+networks:
+  default:
+    external:
+      name: ${network_name}
