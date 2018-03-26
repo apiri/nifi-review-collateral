@@ -3,7 +3,7 @@
 git clone https://github.com/apache/nifi-minifi.git ${HOME}/nifi-minifi
 cd /root/nifi-minifi
 sed -e '9ifetch = +refs/pull/*/head:refs/remotes/origin/pr/*' -i ${HOME}/nifi-minifi/.git/config
-git fetch --all && git checkout origin/pr/112
+git fetch --all && git checkout origin/pr/113
 mvn clean install -DskipTests -T2
 
 
