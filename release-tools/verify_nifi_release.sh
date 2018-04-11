@@ -1,12 +1,15 @@
+#!/bin/sh -e
+
 #!/bin/bash -e
 
 # Adapted from the guidance provided at http://nifi.apache.org/development/release-guide.html
-repository=orgapachenifi-1079
-version=0.6.0
+repository=orgapachenifi-1098
+version=1.1.2
 base_url=https://repository.apache.org/service/local/repositories/${repository}/content/org/apache/nifi/nifi/${version}
+RC=1
 
 release_file=nifi-${version}-source-release.zip
-release_git_commit_hash=0b9bd20d31d7f805300254da768d91b973480151
+release_git_commit_hash=51fad01f5daf33716b8b5379c32ee932d91c8c63
 
 print_section_header() {
     echo
@@ -49,7 +52,7 @@ gpg --verify ${release_file}.asc ${release_file}
 
 print_section_header "Acquiring source repository"
 git clone https://git-wip-us.apache.org/repos/asf/nifi.git
-
+git -C nifi checkout nifi-${version}-RC${RC}
 
 print_section_header "Performing diff of release versus source commit"
 diff --brief -r nifi-${version} nifi
