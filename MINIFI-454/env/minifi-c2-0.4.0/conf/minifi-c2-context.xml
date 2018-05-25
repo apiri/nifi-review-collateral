@@ -100,5 +100,11 @@
                 <constructor-arg value="classpath:authorizations.yaml"/>
             </bean>
         </constructor-arg>
+        <constructor-arg>
+            <value>1000</value>
+        </constructor-arg>
+        <constructor-arg>
+            <value>1000</value>
+        </constructor-arg>
     </bean>
 </beans>

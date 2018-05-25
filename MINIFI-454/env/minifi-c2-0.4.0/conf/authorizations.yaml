@@ -13,10 +13,10 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-Default Action: deny
+Default Action: allow
 Paths:
   /c2/config:
-    Default Action: deny
+    Default Action: allow
     Actions:
     - Authorization: CLASS_RASPI_3
       Query Parameters:
@@ -30,7 +30,7 @@ Paths:
       Action: allow
 
   /c2/config/contentTypes:
-    Default Action: deny
+    Default Action: allow
     Actions:
     - Authorization: CLASS_RASPI_3
       Action: allow

@@ -20,22 +20,10 @@ version: "3.5"
 
 services:
 
-  nifi:
-    image: apache/nifi:1.6.0
-    ports:
-      - "8080:8080" # UI
-      - "10000" # Site-to-Site Input Port
-    networks:
-      - agent
-      - infra
-
   c2:
     build: ./docker-c2
     ports:
       - 10080:10080
-    environment:
-      - minifi_c2_nifi_registry_url=http://registry:18080
-      - minifi_c2_nifi_registry_bucket_id=test_bucket
     networks:
       - agent
       - infra
@@ -44,14 +32,14 @@ services:
       - registry
 
   agent:
-    image: apache/nifi-minifi
+    image: apache/nifi-minifi:0.4.0
     networks:
       - agent
     depends_on:
       - c2
 
   ca:
-    image: apache/nifi-toolkit
+    image: apache/nifi-toolkit:1.6.0
     networks:
       - agent
       - infra
