@@ -1,0 +1,20 @@
+  Controller Services:
+   - name: NetworkPrioritizerService
+     id: 2438e3c8-015a-1000-79ca-83af40ec1883
+     class: NetworkPrioritizerService
+     Properties:
+         Linked Services: NetworkPrioritizerService2,NetworkPrioritizerService3
+   - name: NetworkPrioritizerService2
+     id: 2438e3c8-015a-1000-79ca-83af40ec1884
+     class: NetworkPrioritizerService
+     Properties:
+         Network Controllers: en0,en1
+         Max Throughput: 1,024,1024
+         Max Payload: 1024
+   - name: NetworkPrioritizerService3
+     id: 2438e3c8-015a-1000-79ca-83af40ec1884
+     class: NetworkPrioritizerService
+     Properties:
+         Network Controllers: en2,en3
+         Max Throughput: 1,024,1024
+         Max Payload: 1,024,1024
